@@ -484,7 +484,7 @@ select {
       border-color: rgba($dark-blue, 0.5);
       padding: 0.4em;
       width: 10em;
-      background: rgba($dark-blue, 0.3);
+      background: lighten($green, 45%);//rgba($dark-blue, 0.3);
       box-shadow: none !important;
       position: relative;
       z-index: 0;
@@ -533,7 +533,7 @@ select {
   padding: 0 1.5em;
 
   ul.menu-children {
-    background: $medium-grey;
+    background: $dark-blue;//$medium-grey;
     display: none;
     position: absolute;
     z-index: 99;
@@ -544,6 +544,15 @@ select {
     &.visible {
       display: block;
     }
+    a {
+      color: $white;
+
+       &:hover, &:focus {
+        color: $white;
+        box-shadow: inset 0 -3px 0 lighten($green, 40%);//$dark-blue;
+      }
+    }
+
   }
 
   li {
@@ -560,7 +569,7 @@ select {
 
       &:hover, &:focus {
         color: $dark-blue;
-        box-shadow: inset 0 -3px 0 $dark-blue;
+        box-shadow: inset 0 -3px 0 $green;//$dark-blue;
       }
 
       &.selected, &.selected:hover {
@@ -2264,25 +2273,26 @@ input.questions-search {
 }
 
 div.flash.error, #errorExplanation {
-  background: red;
+  background: $red; //red;
   color: white;
+  text-align: center;
 }
 
 div.flash.notice {
   background-color: $green;
-  color: darken($green, 25%);
+  color: $true-white; //darken($true-white, 25%);
 }
 
 div.flash.warning, .conflict {
   background-color: $orange;
-  color: darken($orange, 25%);
+  color: darken($orange, 60%);
   text-align: left;
 }
 
 .nodata, .warning {
   text-align: center;
   background-color: $orange;
-  color: darken($orange, 25%);
+  color: darken($orange, 60%);
 }
 
 #ajax-indicator {
