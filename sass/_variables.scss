@@ -7,6 +7,12 @@ $max-width: 80em;
  */
 
 // TODO: change the color names to their actual semantic for the Theme -- goutnet
+
+$logo: "../images/logo.svg";
+$logo-width: 40; // px
+$logo-side-padding:  6; // px
+$header-logo-spacer: 20; //px
+
 $blue: #2f9e41;//#446E9B;
 $dark-blue: #474D57;
 $light-blue: #4DB55F;

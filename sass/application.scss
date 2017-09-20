@@ -4,6 +4,7 @@
 
 // Variables
 @import "variables";
+@import "variables_overrides";
 
 // Extras
 @import "jqueryui";
@@ -22,6 +23,14 @@
 // Plugins:
 @import "plugins/scrum";
 @import "plugins/accept";
+@import "plugins/impersonate";
+@import "plugins/tweaks";
+@import "plugins/login_audit";
+
+$logo-block-width: ($logo-width + 2 * $logo-side-padding);
+$logo-block-width-unit: $logo-block-width * 1px;
+$header-left-padding-unit: ($logo-block-width + $header-logo-spacer) * 1px;
+
 
 // Custom Overrides
 @import "overrides";
@@ -435,14 +444,13 @@ select {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     position: relative;
-    padding-left: 3.8em;
+    padding-left: $header-left-padding-unit;
     z-index: 0;
-    margin-left: 10px;
   }
 
   .home {
     display: block;
-    width: 3em;
+    width: $logo-side-padding;
     height: 100%;
     border-right: 1px solid darken($blue, 7%);
     border-left: 1px solid darken($blue, 7%);
@@ -455,7 +463,7 @@ select {
     text-align: center;
 
     &:before {
-      content: url(../images/logo.svg);
+      content: url($logo);
     }
 
     &:hover, &:active {
@@ -532,6 +540,14 @@ select {
   margin: 0 -1.5em;
   padding: 0 1.5em;
 
+  &.tabs {
+    position: relative;
+
+    > ul {
+      padding-right: 3em;
+    }
+  }
+
   ul.menu-children {
     background: $dark-blue;//$medium-grey;
     display: none;
@@ -539,7 +555,7 @@ select {
     z-index: 99;
     right: 0;
     left: 0;
-    box-shadow: inset 0 -1px 0 $grey;
+    padding: 0 1.5em;
 
     &.visible {
       display: block;
@@ -576,6 +592,50 @@ select {
         font-weight: 600;
         color: $blue;
         box-shadow: inset 0 -3px 0 $blue;
+      }
+    }
+  }
+
+  .tabs-buttons {
+    background: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    right: 1.5em;
+    display: block !important;
+
+    button {
+      background: none;
+      background: none !important;
+      box-shadow: none !important;
+      border: 0 !important;
+    }
+  }
+
+  .new-object-item {
+    width: 62px;
+    float: left;
+
+    .menu-children {
+
+      &:before {
+        content: "-";
+        width: 62px;
+        display: table-cell;
+        float: left;
+        opacity: 0;
+      }
+    }
+  }
+
+  #new-object {
+    width: 62px;
+
+    .icon-add {
+      position: relative;
+      top: 2px;
+
+      &:before {
+        margin: 0;
       }
     }
   }
@@ -713,12 +773,16 @@ select {
   #hide-sidebar-button {
     position: absolute;
     z-index: 20;
-    top: -40px;
-    padding: 0.5em;
-    left: 0;
+    bottom: 0;
+    padding: .5em .7em;
     cursor: pointer;
-    color: $blue;
-    text-shadow: 1px 1px 1px $white, -1px -1px 1px $white, 1px -1px 1px $white, -1px 1px 1px $white;
+    color: $medium-grey;
+    border: 1px solid $medium-grey;
+    border-bottom: 0;
+
+    i:before {
+      margin: 0;
+    }
   }
 
   #sidebar {
@@ -867,7 +931,6 @@ select {
   color: $grey;
   text-align: center;
   padding: 1em;
-  display: none !important;
 }
 
 /* Admin index */
@@ -976,6 +1039,10 @@ table {
       border-bottom: 1px solid $medium-grey;
       font-weight: 500;
       color: $text;
+
+      &.checkbox {
+        padding-left: 0;
+      }
     }
 
     td {
@@ -1600,6 +1667,9 @@ fieldset.collapsible.collapsed {
 }
 
 fieldset#filters {
+  padding-left: 0;
+  padding-right: 0;
+
   table {
     border-collapse: collapse;
     width: 100%;
@@ -1642,6 +1712,11 @@ fieldset#filters {
     text-align: right;
     vertical-align: top;
   }
+}
+
+fieldset#options {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .toggle-multiselect {
@@ -1715,7 +1790,7 @@ div#issue-changesets p {
   }
   padding-left: 34px;
   border-left: 1px solid $medium-grey;
-  
+
   h4 {
     &::before {
       content: "";
@@ -2442,6 +2517,7 @@ table.progress {
   text-align: center;
   float: left;
   margin: 1px 6px 1px 0;
+  min-width: 80px;
 }
 
 table.progress td.closed {
@@ -2921,6 +2997,15 @@ a.close-icon:hover {
 
 .icon-lock {
   @extend .fa-lock;
+}
+
+.icon-user {
+  @extend .fa-user;
+}
+
+
+.icon-email-add {
+  @extend .fa-envelope-square;
 }
 
 .icon-unlock {
